@@ -1,170 +1,170 @@
-# ML Classifier - Breast Cancer Prediction
+# Classificador ML – Predição de Câncer de Mama
 
-A machine learning project that builds and deploys a neural network classifier for breast cancer prediction using the scikit-learn breast cancer dataset.
+Projeto de Machine Learning que constrói e disponibiliza um classificador baseado em rede neural para predição de câncer de mama utilizando o dataset de câncer de mama do scikit-learn.
 
-## Project Structure
+## Estrutura do Projeto
 
 ```
 /mlops_project
-├── app/                          # Web application
-│   ├── __init__.py               # Package marker
-│   ├── main.py                   # Flask app with prediction API
-│   └── templates/                # HTML templates for web UI
-│       └── index.html            # Web interface for predictions
-├── artifacts/                    # Preprocessing artifacts
-├── data/                         # Data storage
-│   ├── preprocessed/             # Cleaned data
-│   ├── processed/                # Feature-engineered data
-│   └── raw/                      # Raw dataset
-├── metrics/                      # Model performance metrics
-├── models/                       # Trained model
-├── src/                          # Source code modules
-│   ├── __init__.py               # Package marker
-│   ├── data_loading/             # Data loading utilities
-│   │   ├── __init__.py           # Package marker
-│   │   └── load_data.py          # Dataset loading and preparation
-│   ├── data_preprocessing/       # Data cleaning and splitting
-│   │   ├── __init__.py           # Package marker
-│   │   └── preprocess_data.py    # Data cleaning and imputation
-│   ├── feature_engineering/      # Feature transformation utilities
-│   │   ├── __init__.py           # Package marker
-│   │   └── engineer_features.py  # Feature scaling and transformation
-│   ├── model_evaluation/         # Model evaluation scripts
-│   │   ├── __init__.py           # Package marker
-│   │   └── evaluate_model.py     # Model performance evaluation
-│   └── model_training/           # Model training scripts
-│       ├── __init__.py           # Package marker
-│       └── train_model.py        # Neural network training
-├── .dockerignore                 # Docker ignore rules
-├── Dockerfile                    # Docker build instructions
-├── params.yaml                   # Configuration parameters
-├── pyproject.toml                # Python dependencies and project metadata
-└── README.md                     # Project documentation
+├── app/                          # Aplicação web
+│   ├── __init__.py               # Marcador de pacote
+│   ├── main.py                   # App Flask com API de predição
+│   └── templates/                # Templates HTML para a interface web
+│       └── index.html            # Interface web para predições
+├── artifacts/                    # Artefatos de pré-processamento
+├── data/                         # Armazenamento de dados
+│   ├── preprocessed/             # Dados limpos
+│   ├── processed/                # Dados com engenharia de atributos
+│   └── raw/                      # Dataset bruto
+├── metrics/                      # Métricas de performance do modelo
+├── models/                       # Modelo treinado
+├── src/                          # Módulos de código-fonte
+│   ├── __init__.py               # Marcador de pacote
+│   ├── data_loading/             # Utilitários de carregamento de dados
+│   │   ├── __init__.py           # Marcador de pacote
+│   │   └── load_data.py          # Carregamento e preparação do dataset
+│   ├── data_preprocessing/       # Limpeza e divisão dos dados
+│   │   ├── __init__.py           # Marcador de pacote
+│   │   └── preprocess_data.py    # Limpeza de dados e imputação
+│   ├── feature_engineering/      # Utilitários de transformação de atributos
+│   │   ├── __init__.py           # Marcador de pacote
+│   │   └── engineer_features.py  # Escalonamento e transformação de atributos
+│   ├── model_evaluation/         # Scripts de avaliação do modelo
+│   │   ├── __init__.py           # Marcador de pacote
+│   │   └── evaluate_model.py     # Avaliação de performance do modelo
+│   └── model_training/           # Scripts de treinamento do modelo
+│       ├── __init__.py           # Marcador de pacote
+│       └── train_model.py        # Treinamento da rede neural
+├── .dockerignore                 # Regras de exclusão do Docker
+├── Dockerfile                    # Instruções de build do Docker
+├── params.yaml                   # Parâmetros de configuração
+├── pyproject.toml                # Dependências Python e metadados do projeto
+└── README.md                     # Documentação do projeto
 ```
 
-## Features
 
-- **Data Pipeline**: Complete ETL pipeline from raw data to model-ready features
-- **Neural Network**: TensorFlow/Keras deep learning model with configurable architecture
-- **Web Interface**: Flask-based web application for making predictions
-- **Artifact Management**: Serialized models and preprocessors for deployment
-- **Evaluation Metrics**: Comprehensive model performance analysis
+## Funcionalidades
+- **Pipeline de Dados**: Pipeline ETL completo desde os dados brutos até atributos prontos para o modelo
+- **Rede Neural**: Modelo de deep learning em TensorFlow/Keras com arquitetura configurável
+- **Interface Web**: Aplicação web baseada em Flask para realizar predições
+- **Gerenciamento de Artefatos**: Modelos e preprocessadores serializados para deploy
+- **Métricas de Avaliação**: Análise completa da performance do modelo
 
-## Dependencies
+## Dependências
 
-The project requires Python 3.12+ and the packages informed in `pyproject.toml`.
+O projeto requer Python 3.12+ e os pacotes informados no arquivo `pyproject.toml`.
 
-## Installation
+## Instalação
 
-1. Clone the repository:
+1. Clone o repositório:
 ```bash
 git clone <repository-url>
 cd mlops_project
 ```
 
-2. Install dependencies:
+2. Instale as dependências:
 ```bash
 pip install -e .
 ```
 
-## Configuration
+## Configuração
 
-Model hyperparameters and data processing settings are configured in `params.yaml`.
+Os hiperparâmetros do modelo e as configurações de processamento de dados são definidos no arquivo `params.yaml`.
 
-## Model Architecture
+## Arquitetura do Modelo
 
-The neural network consists of a multilayer perceptron with 2 hidden layers.
+A rede neural consiste em um perceptron multicamadas (MLP) com 2 camadas ocultas.
 
-## Artifacts
+## Artefatos
 
-The training process generates the following files:
+O processo de treinamento gera os seguintes arquivos:
 
-In the `models/` directory:
-- `model.keras`: Trained TensorFlow model
+No diretório `models/`:
+- `model.keras`: Modelo TensorFlow treinado
 
-In the `artifacts/` directory:
-- `[features]_mean_imputer.joblib`: Feature imputer for missing values
-- `[features]_scaler.joblib`: Standard scaler for feature normalization
-- `[target]_one_hot_encoder.joblib`: One-hot encoder for target labels
+No diretório `artifacts/`:
+- `[features]_mean_imputer.joblib`: Imputador de média para valores ausentes
+- `[features]_scaler.joblib`: Standard scaler para normalização dos atributos
+- `[target]_one_hot_encoder.joblib`: Codificador one-hot para as classes alvo
 
-## Metrics
+## Métricas
 
-Model performance metrics are saved to:
-- `metrics/training.json`: Training history and validation metrics
-- `metrics/evaluation.json`: Test set performance and confusion matrix
+As métricas de performance do modelo são salvas em:
+- `metrics/training.json`: Histórico de treinamento e métricas de validação
+- `metrics/evaluation.json`: Performance no conjunto de teste e matriz de confusão
 
-## Development
+## Desenvolvimento
 
-The project follows a modular structure with separate concerns:
-- **Data Loading**: Fetches and saves raw breast cancer dataset
-- **Preprocessing**: Handles missing values and data splitting
-- **Feature Engineering**: Applies scaling transformations
-- **Model Training**: Builds and trains the neural network
-- **Model Evaluation**: Generates performance metrics
-- **Web Application**: Provides prediction interface
+O projeto segue uma estrutura modular com separação clara de responsabilidades:
+- **Carregamento de Dados**: Busca e salva o dataset bruto de câncer de mama
+- **Pré-processamento**: Trata valores ausentes e realiza a divisão treino/teste
+- **Engenharia de Atributos**: Aplica transformações e escalonamento
+- **Treinamento do Modelo**: Constrói e treina a rede neural
+- **Avaliação do Modelo**: Gera métricas de performance
+- **Aplicação Web**: Disponibiliza interface para predições
 
-Each module can be run independently and saves its outputs for the next stage in the pipeline.
+Cada módulo pode ser executado de forma independente e salva suas saídas para a próxima etapa do pipeline.
 
-## Usage
+## Uso
 
-### Training the Model
+### Treinamento do Modelo
 
-Run the complete ML pipeline (for proper logging to the terminal, run as modules with `python -m`):
+Execute o pipeline completo de ML (para melhor visualização de logs no terminal, execute como módulos usando `python -m`):
 
 ```bash
-# 1. Load and prepare raw data
+# 1. Carregar e preparar os dados brutos
 python -m src.data_loading.load_data
 
-# 2. Preprocess data (imputation, train/test split)
+# 2. Pré-processar os dados (imputação e divisão treino/teste)
 python -m src.data_preprocessing.preprocess_data
 
-# 3. Engineer features (scaling)
+# 3. Engenharia de atributos (escalonamento)
 python -m src.feature_engineering.engineer_features
 
-# 4. Train the neural network model
+# 4. Treinar o modelo de rede neural
 python -m src.model_training.train_model
 
-# 5. Evaluate model performance
+# 5. Avaliar a performance do modelo
 python -m src.model_evaluation.evaluate_model
 ```
 
-### Running the Web Application
+### Executando a Aplicação Web
 
 #### Flask
 
-After training the model, start the Flask web server:
+Após o treinamento do modelo, inicie o servidor Flask:
 
 ```bash
 python app/main.py
 ```
 
-The application will be available at `http://localhost:5001`
+A aplicação estará disponível em `http://localhost:5001`
 
 ### Docker
 
-You can instead build and run the application using Docker:
+Alternativamente, você pode construir e executar a aplicação usando Docker.
 
-#### Build the Docker image
+#### Build da imagem Docker
 
 ```bash
 docker build -t ml-classifier .
 ```
 
-#### Run the Docker container
+#### Execução do container Docker
 
 ```bash
 docker run -p 5001:5001 ml-classifier
 ```
 
-The web application will be available at `http://localhost:5001`.
+A aplicação web estará disponível em `http://localhost:5001`.
 
-### Making Predictions
+### Realizando Predições
 
-1. **Web Interface**: Upload a CSV file with breast cancer features through the web interface
-2. **API**: The `/upload` endpoint accepts CSV files and returns predictions
+1. **Interface Web**: Envie um arquivo CSV com os atributos do câncer de mama pela interface web
+2. **API**: O `/upload` endpoint aceita arquivos CSV e retorna as predições
 
-#### Required CSV Format
+#### Formato Obrigatório do CSV
 
-Your CSV file must contain all 30 breast cancer features with exact column names:
+O arquivo CSV deve conter exatamente as 30 features do dataset de câncer de mama, com os nomes de colunas corretos:
 - mean radius, mean texture, mean perimeter, mean area, mean smoothness, etc.
-- See `sklearn.datasets.load_breast_cancer().feature_names` for the complete list
+- Consulte `sklearn.datasets.load_breast_cancer().feature_names` para a lista completa
