@@ -58,7 +58,7 @@ O projeto requer Python 3.12+ e os pacotes informados no arquivo `pyproject.toml
 
 1. Clone o repositório:
 ```bash
-git clone https://github.com/thiagoGna/projeto_mlops.git
+git clone <https://github.com/thiagoGna/projeto_mlops.git>
 cd mlops_project
 ```
 
